@@ -29,9 +29,9 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_BOOK = gql`
-  mutation saveBook($input: savedBook!) {
+  mutation saveBook($bookData: bookInput!) {
     # Use the saveBook mutation and pass in the required variable (input) as an argument to the mutation
-    saveBook(input: $input) {
+    saveBook(bookData: $bookData) {
       # When the mutation is complete, return the updated user object
       _id
       username
