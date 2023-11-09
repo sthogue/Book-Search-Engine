@@ -5,7 +5,8 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('thoughts');
+        const payload = await User.findOne({ _id: context.user._id }).select('-__v -password')
+        return payload;
       }
       throw AuthenticationError;
     },
@@ -36,11 +37,11 @@ const resolvers = {
         return { token, user };
     },
     // Takes in book author, description, title, bookId, image, and link as parameters and returns a User type.
-    saveBook: async (parent, { book }, context) => {
+    saveBook: async (parent, { bookData }, context) => {
         if (context.user) {
-            const updatedUser = await User.findOneAndDelete(
+            const updatedUser = await User.findByIdAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { savedBooks: body } },
+                { $push: { savedBooks: bookData } },
                 { new: true, runValidators: true }
             );
             return updatedUser;

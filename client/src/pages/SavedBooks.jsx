@@ -38,11 +38,10 @@ const SavedBooks = () => {
      const { data } = await removeBook({
         variables: { bookId }
       });
-      console.error(err);
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   };
 
@@ -50,7 +49,7 @@ const SavedBooks = () => {
     <>
       <div fluid className="text-light bg-dark p-5">
         <Container>
-          <h1>Viewing saved books!</h1>
+          <h1>Viewing {userData.username}, saved books!</h1>
         </Container>
       </div>
       <Container>

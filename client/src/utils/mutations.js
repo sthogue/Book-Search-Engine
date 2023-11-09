@@ -29,7 +29,7 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_BOOK = gql`
-  mutation saveBook($bookData: bookInput!) {
+  mutation saveBook($bookData: BookInput!) {
     # Use the saveBook mutation and pass in the required variable (input) as an argument to the mutation
     saveBook(bookData: $bookData) {
       # When the mutation is complete, return the updated user object
@@ -51,14 +51,13 @@ export const SAVE_BOOK = gql`
 `;
 
 export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: String!) {
+  mutation removeBook($bookId: ID!) {
     # Use the removeBook mutation and pass in the required variable (bookId) as an argument to the mutation
     removeBook(bookId: $bookId) {
       # When the mutation is complete, return the updated user object
       _id
       username
       email
-      bookCount
       savedBooks {
         # Make sure that the savedBooks field returns an array of books!
         bookId
